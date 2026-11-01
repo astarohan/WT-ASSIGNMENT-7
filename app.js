@@ -1,0 +1,11 @@
+const express=require('express'),cors=require('cors'),morgan=require('morgan');
+const routes=require('./routes/studentRoutes'),errorHandler=require('./middleware/errorHandler');
+const app=express();
+app.use(cors({origin:process.env.CLIENT_ORIGIN||'http://localhost:5173'}));
+app.use(morgan('dev')); app.use(express.json({limit:'1mb'}));
+app.get('/',(req,res)=>res.json({success:true,message:'Student Management API is running',endpoints:'/api/students'}));
+app.get('/health',(req,res)=>res.json({success:true,status:'healthy'}));
+app.use('/api/students',routes);
+app.use((req,res)=>res.status(404).json({success:false,message:`Route not found: ${req.method} ${req.originalUrl}`}));
+app.use(errorHandler);
+module.exports=app;
