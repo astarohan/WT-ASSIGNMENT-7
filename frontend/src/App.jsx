@@ -1,5 +1,5 @@
 import {useEffect,useMemo,useState} from 'react';
-const API=(import.meta.env.VITE_API_URL||'http://localhost:5000/api').replace(/\\/$/,'');
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const blank={name:'',email:'',prn:'',mobile:'',course:'B.Tech',department:'AIML',year:3};
 export default function App(){
  const [rows,setRows]=useState([]),[form,setForm]=useState(blank),[edit,setEdit]=useState(null);
