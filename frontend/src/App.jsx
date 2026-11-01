@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 const API =
   import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -135,7 +135,9 @@ export default function App() {
 
       const j = await r.json();
 
-      if (!r.ok) throw Error(j.message || 'Delete failed');
+      if (!r.ok) {
+        throw Error(j.message || 'Delete failed');
+      }
 
       setMsg(j.message);
       load();
